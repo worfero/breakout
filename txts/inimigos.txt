@@ -1,0 +1,5 @@
+- chefe que gira as plataformas
+- chefe que tem plataformas vivas
+    - elas podem rebater a bola para uma direção inesperada
+- chefe que muda o tipo de plataformas
+- chefe que tem seu próprio paddle

@@ -66,6 +66,11 @@ function Shape:setRotation(angle, x,y)
 	return self:rotate(angle - self._rotation, x,y)
 end
 
+function Shape:setWidth(width)
+	local prevWidth = self._polygon:width()
+	self._polygon:stretch(width - prevWidth)
+end
+
 --
 -- class definitions
 --

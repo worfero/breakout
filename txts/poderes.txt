@@ -1,0 +1,14 @@
+Bons:
+    - aumenta tamanho do paddle
+    - vida extra
+    - missil
+    - diminui velocidade da bola
+
+Neutros:
+    - 2 bolas no campo
+    - 3 bolas no campo
+    - 2 paddles simultaneos
+
+Ruins:
+    - diminui tamanho do paddle
+    - aumenta velocidade da bola

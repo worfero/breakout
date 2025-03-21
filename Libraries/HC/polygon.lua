@@ -272,6 +272,21 @@ function Polygon:move(dx, dy)
 	self.centroid.y = self.centroid.y + dy
 end
 
+function Polygon:width()
+	local width
+	width = self.vertices[3].x - self.vertices[1].x
+	return width
+end
+
+function Polygon:stretch(width)
+	for i=1,2 do
+		self.vertices[i].x = self.vertices[i].x - width/2
+	end
+	for i=3,4 do
+		self.vertices[i].x = self.vertices[i].x + width/2
+	end
+end
+
 function Polygon:rotate(angle, cx, cy)
 	if not (cx and cy) then
 		cx,cy = self.centroid.x, self.centroid.y

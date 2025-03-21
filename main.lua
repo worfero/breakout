@@ -1,25 +1,25 @@
-require "level-manager"
-require "block"
+require "scene-manager"
+require "Util.auxfunc"
+require "on-game-UI"
+require "Classes.block"
 require "player"
-require "ball"
+require "Classes.ball"
+require "handler"
 require 'collision-edges'
 
 HC = require 'Libraries.HC'
 
+screenWidth = love.graphics.getWidth()
+screenHeight = love.graphics.getHeight()
+
 function love.load()
-    levelmanager.LOAD()
-    player.LOAD()
-    ball.LOAD()
+    scenemanager.LOAD()
 end
 
 function love.draw()
-    levelmanager.DRAW()
-    player.DRAW()
-    ball.DRAW()
+    scenemanager.DRAW()
 end
 
 function love.update(dt)
-    levelmanager.UPDATE(dt)
-    player.UPDATE(dt)
-    ball.UPDATE(dt)
+    scenemanager.UPDATE(dt)
 end
