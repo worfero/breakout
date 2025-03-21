@@ -1,1 +1,0 @@
-"C:\Users\henriquewolf\Desktop\HenriqueWolf\1. Projetos\4. Outros\Lua\LOVE\love.exe" "C:\Users\henriquewolf\Desktop\HenriqueWolf\1. Projetos\4. Outros\Lua\LOVE\Breakout"
