@@ -16,12 +16,8 @@ function LoadCurrentScene() -- maquina de estados para controlar qual level ser�
 		scenes.MainMenuLoad()
 	elseif(currentLevel == 1) then
 		scenes.Level1Load()
-		player.initialPosition() -- no início de cada level, seta a posição da raquete e da bola para o centro
-		balls[1]:initialPosition(screenWidth/2, screenHeight/2, 0, 1, 5)
 	elseif(currentLevel == 2) then
 		scenes.Level2Load()
-		player.initialPosition()
-		balls[1]:initialPosition(screenWidth/2, screenHeight/2, 0, 1, 5)
 	end
 end
 

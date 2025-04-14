@@ -26,6 +26,7 @@ function Ball:initialPosition(x, y, vx, direction, vy)
     self.angle = pi/2 + pi/tweak
     self.speed = 5
     self.wait = 1 -- tempo de espera da bola antes de iniciar o jogo
+    self.debugTime = nil
 end
 
 function Ball:move(dt)
@@ -83,23 +84,35 @@ function Ball:update(dt)
     end
     --paddle
     col, dx, dy = self.collider:collidesWith(paddleCollider)
-    if(CollisionRisingEdge(col, self.paddleCollisionRsEdg)) then
-        if math.abs(dy) >= math.abs(dx) and math.abs(dx) < 1 then
-            local pos = self.x - player.x
-            local posperc = (pos/(paddle.width/2))
-            
-            if self.x > player.x then
-                --self.angle = 2*pi - self.angle - (pi/200*math.abs(posperc) - pi/2)/2
-                -------self.angle = 2*pi - self.angle + math.abs(self.angle*math.abs(posperc)/4)
-                self.angle = 2*pi - self.angle + (pi/2*posperc)/6
-            else
-                --self.angle = 2*pi - self.angle + (pi/200*math.abs(posperc) - pi/2)/2
-                -------self.angle = 2*pi - self.angle - math.abs(self.angle*math.abs(posperc)/4)
-                self.angle = 2*pi - self.angle + (pi/2*posperc)/6
-            end
-            self.y = self.y - 2
+    if self.debugTime then -- lógica para fazer a bola esperar o jogo começar
+        self.debugTime = self.debugTime - dt
+        if self.debugTime <= 0 then self.debugTime = nil end
+        if self.x > player.x then
+            self.x = player.x + paddle.width/2
         else
-            --self.vx = -self.vx + 6*self.vy
+            self.x = player.x - paddle.width/2
+        end
+    else
+        if(CollisionRisingEdge(col, self.paddleCollisionRsEdg)) then
+            if math.abs(dy) >= math.abs(dx) and math.abs(dx) < 1 then
+                local pos = self.x - player.x
+                local posperc = (pos/(paddle.width/2))
+                
+                if self.x > player.x then
+                    --self.angle = 2*pi - self.angle - (pi/200*math.abs(posperc) - pi/2)/2
+                    -------self.angle = 2*pi - self.angle + math.abs(self.angle*math.abs(posperc)/4)
+                    self.angle = 2*pi - self.angle + (pi/2*posperc)/6
+                else
+                    --self.angle = 2*pi - self.angle + (pi/200*math.abs(posperc) - pi/2)/2
+                    -------self.angle = 2*pi - self.angle - math.abs(self.angle*math.abs(posperc)/4)
+                    self.angle = 2*pi - self.angle + (pi/2*posperc)/6
+                end
+                self.y = self.y - 2
+            else
+                --self.vx = -self.vx + 6*self.vy
+                self.angle = pi - self.angle
+                self.debugTime = 0.5
+            end
         end
     end
 end

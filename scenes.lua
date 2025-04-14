@@ -1,3 +1,5 @@
+require "levels"
+
 local font = love.graphics.newFont("Fonts/8-bit-hud.ttf", 8)
 
 texto = {}
@@ -22,6 +24,8 @@ function scenes.commonLoad()
 	balls[1] = Ball(screenWidth/2, screenHeight/2, 0, 1, 5)
 	ongameUI.LOAD()
     player.LOAD()
+	player.initialPosition() -- no início de cada level, seta a posição da raquete e da bola para o centro
+	balls[1]:initialPosition(screenWidth/2, screenHeight/2, 0, 1, 5)
 end
 
 function scenes.MainMenuLoad()
@@ -32,24 +36,27 @@ function scenes.MainMenuLoad()
 end
 
 function scenes.Level1Load()
-	scenes.commonLoad()
-    for i=1, 4 do
-		for k=1, 6 do
-			blocks[k + 6*(i-1)] = Block(20 + 130*(k-1), 20 + 40*(i-1), i-1)
+	local map = level1
+    for i=1, 9 do
+		for j=1, 6 do
+			if map[i][j] > 0 then
+				blocks[#blocks + 1] = Block(20 + 130*(j-1), 20 + 40*(i-1), map[i][j]-1)
+			end
 		end
-	end
-	--blocks[1] = Block(20, 20)
+    end
+	scenes.commonLoad()
 end
 
 function scenes.Level2Load()
-	scenes.commonLoad()
-	local c = 1
-    for i=1, 6 do
-		for k=1, i do
-			blocks[c] = Block(20 + 130*(k-1), 20 + 40*(i-1), 0)
-			c = c + 1
+	local map = level2
+    for i=1, 9 do
+		for j=1, 6 do
+			if map[i][j] > 0 then
+				blocks[#blocks + 1] = Block(20 + 130*(j-1), 20 + 40*(i-1), map[i][j]-1)
+			end
 		end
-	end
+    end
+	scenes.commonLoad()
 end
 
 ---------------------------
